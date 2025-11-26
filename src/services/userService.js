@@ -3,45 +3,45 @@ import authService from './authService'
 const API_BASE_URL = 'https://localhost:7109/api'
 
 class UserService {
-  async getAllUsers() {
-    try {
-      const response = await fetch(`${API_BASE_URL}/User`, {
-        method: 'GET',
-        headers: authService.getAuthHeaders(),
-      })
+    async getAllUsers() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/User`, {
+                method: 'GET',
+                headers: authService.getAuthHeaders(),
+            })
 
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || 'Error al obtener usuarios')
-      }
+            if (!response.ok) {
+                const error = await response.json()
+                throw new Error(error.message || 'Error al obtener usuarios')
+            }
 
-      return await response.json()
-    } catch (error) {
-      throw error
+            return await response.json()
+        } catch (error) {
+            throw error
+        }
     }
-  }
 
-  async changePassword(userId, newPassword, confirmPassword) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/User/${userId}/change-password`, {
-        method: 'PUT',
-        headers: authService.getAuthHeaders(),
-        body: JSON.stringify({
-          newPassword,
-          confirmPassword,
-        }),
-      })
+    async changePassword(userId, newPassword, confirmPassword) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/User/${userId}/change-password`, {
+                method: 'PUT',
+                headers: authService.getAuthHeaders(),
+                body: JSON.stringify({
+                    newPassword,
+                    confirmPassword,
+                }),
+            })
 
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || 'Error al cambiar contraseña')
-      }
+            if (!response.ok) {
+                const error = await response.json()
+                throw new Error(error.message || 'Error al cambiar contraseña')
+            }
 
-      return await response.json()
-    } catch (error) {
-      throw error
+            return await response.json()
+        } catch (error) {
+            throw error
+        }
     }
-  }
 }
 
 export default new UserService()
