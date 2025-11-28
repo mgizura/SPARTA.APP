@@ -1,6 +1,6 @@
 import authService from '../../../services/authService'
 
-const API_BASE_URL = 'https://localhost:7109/api'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 // History service - Business logic for history feature
 export const historyService = {

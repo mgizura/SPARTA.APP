@@ -1,6 +1,6 @@
 import authService from './authService'
 
-const API_BASE_URL = 'https://localhost:7109/api'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 class UserService {
     async getAllUsers() {

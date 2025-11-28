@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://localhost:7109/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 class AuthService {
   constructor() {
@@ -22,11 +22,11 @@ class AuthService {
       }
 
       const data = await response.json();
-      
+
       // Guardar token y usuario en localStorage
       localStorage.setItem(this.tokenKey, data.token);
       localStorage.setItem(this.userKey, JSON.stringify(data.user));
-      
+
       return data;
     } catch (error) {
       throw error;
