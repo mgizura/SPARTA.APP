@@ -11,6 +11,7 @@ import {
     ToggleButtonGroup,
 } from '@mui/material'
 import DownloadIcon from '@mui/icons-material/Download'
+import ReactMarkdown from 'react-markdown'
 import { historyService } from './service/historyService'
 import { historyModel } from './model/historyModel'
 
@@ -19,6 +20,7 @@ function History() {
     const [generating, setGenerating] = useState(false)
     const [generatedResult, setGeneratedResult] = useState('')
     const [option, setOption] = useState('test') // 'test', 'upgrade', 'both'
+    const [viewMode, setViewMode] = useState('raw') // 'raw' | 'preview'
 
     const handleOptionChange = (event, newOption) => {
         if (newOption !== null) {
@@ -34,6 +36,7 @@ function History() {
         try {
             setGenerating(true)
             setGeneratedResult('') // Limpiar resultado anterior
+            setViewMode('raw')
             const newEntry = historyModel.createEntry({
                 title: inputText,
                 description: '',
@@ -74,6 +77,12 @@ function History() {
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
+    }
+
+    const handleViewModeChange = (_event, mode) => {
+        if (mode !== null) {
+            setViewMode(mode)
+        }
     }
 
     return (
@@ -198,6 +207,18 @@ function History() {
 
                 {/* Área de Resultado */}
                 <Box sx={{ position: 'relative', mb: 2 }}>
+                    <Box sx={{ display: 'flex', mb: 1 }}>
+                        <ToggleButtonGroup
+                            value={viewMode}
+                            exclusive
+                            onChange={handleViewModeChange}
+                            size="small"
+                            disabled={!generatedResult}
+                        >
+                            <ToggleButton value="raw">Texto</ToggleButton>
+                            <ToggleButton value="preview">Vista previa</ToggleButton>
+                        </ToggleButtonGroup>
+                    </Box>
                     <Box
                         sx={{
                             minHeight: '400px',
@@ -206,13 +227,13 @@ function History() {
                             p: 3,
                             border: 'none',
                             color: 'text.primary',
-                            whiteSpace: 'pre-wrap',
+                            whiteSpace: viewMode === 'preview' ? 'normal' : 'pre-wrap',
                             wordWrap: 'break-word',
                             fontSize: '1rem',
                             lineHeight: 1.6,
                             display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                            alignItems: generatedResult || generating ? 'flex-start' : 'center',
+                            justifyContent: generatedResult || generating ? 'flex-start' : 'center',
                         }}
                     >
                         {generating ? (
@@ -233,7 +254,35 @@ function History() {
                                 </Typography>
                             </Box>
                         ) : generatedResult ? (
-                            <Box sx={{ width: '100%' }}>{generatedResult}</Box>
+                            <Box sx={{ width: '100%' }}>
+                                {viewMode === 'preview' ? (
+                                    <Box
+                                        sx={{
+                                            '& h1, & h2, & h3, & h4': {
+                                                mt: 3,
+                                                mb: 1.5,
+                                            },
+                                            '& p': {
+                                                mb: 2,
+                                            },
+                                            '& ol, & ul': {
+                                                pl: 3,
+                                                mb: 2,
+                                            },
+                                            '& li': {
+                                                mb: 1,
+                                            },
+                                            '& strong': {
+                                                fontWeight: 600,
+                                            },
+                                        }}
+                                    >
+                                        <ReactMarkdown>{generatedResult}</ReactMarkdown>
+                                    </Box>
+                                ) : (
+                                    generatedResult
+                                )}
+                            </Box>
                         ) : (
                             <Typography
                                 variant="body1"
