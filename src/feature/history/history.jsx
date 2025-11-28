@@ -147,10 +147,10 @@ function History() {
                                         '& .MuiToggleButton-root': {
                                             border: '1px solid',
                                             borderColor: 'primary.main',
-                                            color: 'text.primary',
+                                            color: '#FFFFFF',
                                             '&.Mui-selected': {
                                                 backgroundColor: 'primary.main',
-                                                color: 'primary.contrastText',
+                                                color: '#424242',
                                                 '&:hover': {
                                                     backgroundColor: 'primary.dark',
                                                 },
@@ -179,7 +179,7 @@ function History() {
                                     sx={{
                                         minHeight: '56px',
                                         backgroundColor: 'primary.main',
-                                        color: 'primary.contrastText',
+                                        color: '#424242',
                                         '&:hover': {
                                             backgroundColor: 'primary.dark',
                                         },
@@ -189,7 +189,7 @@ function History() {
                                         },
                                     }}
                                 >
-                                    {generating ? 'Generando...' : 'Generar'}
+                                    {generating ? 'GENERANDO...' : 'GENERAR'}
                                 </Button>
                             </Box>
                         </Grid>

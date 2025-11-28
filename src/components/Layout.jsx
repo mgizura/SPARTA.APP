@@ -29,6 +29,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import PeopleIcon from '@mui/icons-material/People'
+import CloudIcon from '@mui/icons-material/Cloud'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import logoImage from '../asset/image/logo.png'
@@ -51,6 +52,11 @@ const menuItems = [
                 text: 'Usuario',
                 icon: <PeopleIcon />,
                 path: '/configuration/users',
+            },
+            {
+                text: 'Entorno',
+                icon: <CloudIcon />,
+                path: '/configuration/environment',
             },
         ],
     },
@@ -97,6 +103,9 @@ function Layout({ children, mode, toggleMode }) {
     const getPageTitle = () => {
         if (location.pathname === '/configuration/users') {
             return 'Usuarios'
+        }
+        if (location.pathname === '/configuration/environment') {
+            return 'Entorno'
         }
         const currentItem = menuItems.find((item) => item.path === location.pathname)
         return currentItem ? currentItem.text : 'SPARTA'

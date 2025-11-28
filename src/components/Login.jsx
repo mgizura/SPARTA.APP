@@ -49,7 +49,7 @@ function Login() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#1E1E1E',
+        background: 'linear-gradient(135deg, #B155CF 0%, #5F2995 100%)',
         padding: 2,
       }}
     >

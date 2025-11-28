@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import History from './feature/history/history'
 import Configuration from './feature/configuration/configuration'
 import Users from './feature/users/users'
+import Environment from './feature/configuration/environment'
 
 function App() {
   const [mode, setMode] = useState('dark')
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/history" element={<History />} />
                     <Route path="/configuration" element={<Configuration />} />
                     <Route path="/configuration/users" element={<Users />} />
+                    <Route path="/configuration/environment" element={<Environment />} />
                   </Routes>
                 </Layout>
               </ProtectedRoute>
