@@ -123,7 +123,7 @@ function Login() {
               textAlign: 'center',
             }}
           >
-            PREDICTIVE REGRESSION & TESTING
+            Sistema Predictivo Automatizado de Regresión, Testing y Análisis
           </Typography>
 
           {error && (
